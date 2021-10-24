@@ -1,5 +1,5 @@
 import BankCard from './bankCard'
-import ChevronDown from './ChevronDown'
+import ChevronDown from './chevronDown'
 import CircleDollar from './circleDollar'
 import CogWheel from './cogWheel'
 import CubeFrame from './cubeFrame'
