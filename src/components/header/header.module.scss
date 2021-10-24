@@ -22,12 +22,8 @@
     .header__user_options {
       @apply relative cursor-pointer h-full flex items-center;
 
-      &:hover {
-        .header__user_sub_menu {
-          @apply opacity-100 visible;
-        }
-      }
       .header__user_sub_menu {
+        transform: translateY(10px);
         @apply opacity-0 invisible;
         @apply absolute right-0 top-full;
         @apply bg-white;
@@ -58,6 +54,12 @@
         }
         .line {
           border-color: #eaeaea;
+        }
+      }
+
+      &:hover {
+        .header__user_sub_menu {
+          @apply opacity-100 visible transform translate-y-0;
         }
       }
 
