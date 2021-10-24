@@ -1,12 +1,32 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: [
+    './src/pages/**/*.{js,ts,jsx,tsx}',
+    './src/layout/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}'
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    fontFamily: {
+      'san-mulish': ['Mulish'],
+      'san-montserrat': ['Montserrat']
+    },
+    extend: {
+      colors: {
+        primary: '#37393E',
+        secondary: '#0554F2',
+        dark: {
+          300: '#F9FAFB',
+          400: '#B0B3B9',
+          700: '#55575C',
+          800: '#37393E',
+          900: '#17191D'
+        }
+      }
+    }
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: []
 }

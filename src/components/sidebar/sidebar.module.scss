@@ -1,0 +1,79 @@
+.sidebar {
+  @apply bg-white w-[240px] px-3 py-8;
+  box-shadow: 0px 0px 2px rgba(40, 41, 61, 0.04),
+    0px 4px 8px rgba(96, 97, 112, 0.16);
+
+  .sidebar__navigation {
+    .sidebar__list {
+      .sidebar__item {
+        @apply font-san-montserrat;
+        @apply font-semibold text-primary py-[10px] px-2 rounded-lg cursor-pointer;
+        @apply transition duration-300 ease-out;
+
+        .sidebar__link {
+          @apply flex items-center gap-x-3;
+
+          .link__typo {
+            position: relative;
+            overflow: hidden;
+            span {
+              @apply absolute top-0 left-0;
+              @apply overflow-hidden;
+              transform: translateX(-100%);
+              transition: transform 375ms ease;
+              &::before {
+                @apply inline-block underline;
+                content: attr(data-content);
+                //color to be filled
+                @apply text-secondary;
+                transform: translateX(100%);
+                transition: transform 375ms ease;
+              }
+            }
+            &:hover {
+              span {
+                transform: translateX(0);
+                &::before {
+                  transform: translateX(0);
+                }
+              }
+            }
+          }
+        }
+
+        &:hover {
+          // @apply text-secondary;
+          background: rgba(223, 227, 232, 0.3);
+
+          svg:not([class='circle-dollar'], [class='bank-card']) {
+            path {
+              stroke: theme('colors.secondary');
+            }
+          }
+          svg {
+            &[class='circle-dollar'],
+            &[class='bank-card'] {
+              circle {
+                stroke: theme('colors.secondary');
+              }
+              path {
+                fill: theme('colors.secondary');
+              }
+            }
+          }
+
+          .sidebar__link {
+            .link__typo {
+              span {
+                transform: translateX(0);
+                &::before {
+                  transform: translateX(0);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

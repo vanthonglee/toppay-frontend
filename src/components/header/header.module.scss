@@ -1,0 +1,67 @@
+.header {
+  @apply h-[56px] flex justify-between items-center  px-4 w-full text-white bg-[#252626];
+
+  .header__right {
+    @apply flex items-center h-full;
+
+    .header__shop_name {
+      @apply flex items-center h-full;
+    }
+    .header__notification {
+      @apply mx-[30px] h-full flex items-center;
+      .header__ring_bell {
+        margin-left: 35.5px;
+        margin-right: 32.5px;
+      }
+    }
+    .header__user_options {
+      @apply relative cursor-pointer h-full flex items-center;
+
+      &:hover {
+        .header__user_sub_menu {
+          @apply opacity-100 visible;
+        }
+      }
+      .header__user_sub_menu {
+        @apply opacity-0 invisible;
+        @apply absolute right-0 top-full;
+        @apply w-[170px] bg-white rounded-[4px];
+        @apply transition-all duration-300 ease-in-out;
+
+        box-shadow: 0px 4px 20px -10px rgba(0, 0, 0, 0.1);
+        .header__link {
+          @apply flex items-center gap-2;
+          @apply text-dark-800 pl-4 font-semibold;
+          &:not(:last-child) {
+            @apply my-4;
+          }
+          &:last-child {
+            @apply my-2;
+          }
+
+          &:hover {
+            @apply text-secondary;
+
+            svg path {
+              stroke: theme('colors.secondary');
+            }
+          }
+        }
+        .line {
+          @apply border-[#EAEAEA];
+        }
+      }
+
+      &:before {
+        content: '';
+        @apply absolute  w-1/2 h-full;
+        @apply right-full;
+      }
+      &:after {
+        content: '';
+        @apply absolute  w-1/2 h-full;
+        @apply left-full;
+      }
+    }
+  }
+}
