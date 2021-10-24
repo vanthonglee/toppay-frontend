@@ -11,6 +11,7 @@
     }
     .header__notification {
       @apply h-full flex items-center;
+      margin-left: 30px;
       margin-right: 30px;
 
       .header__ring_bell {
