@@ -1,0 +1,64 @@
+.transaction__container {
+  @apply rounded-lg bg-white mt-3;
+  box-shadow: 0px 0px 1px rgba(40, 41, 61, 0.08),
+    0px 0.5px 2px rgba(96, 97, 112, 0.16);
+
+  @apply py-4;
+
+  .transaction__component {
+    @apply px-6 mb-6;
+  }
+  .transaction__status_types {
+    @apply mb-0;
+
+    .status__list {
+      @apply flex gap-x-6;
+
+      .status__item {
+        @apply text-neutral-6 pb-1;
+        @apply cursor-pointer;
+
+        &.active {
+          border-bottom: 2px solid theme('colors.secondary');
+        }
+      }
+    }
+  }
+  .transaction__stats {
+    @apply flex;
+    gap: 72px;
+    @apply mb-6;
+
+    .transaction__card {
+      background: #e6f2ff;
+      @apply font-san-montserrat;
+      @apply rounded-lg p-4 w-1/3;
+      height: 96px;
+
+      @apply flex flex-col justify-center;
+
+      .card__title {
+        line-height: calc(24 / 14);
+        @apply font-medium;
+        @apply text-dark-900;
+      }
+      .stat {
+        line-height: 1.5;
+        @apply text-primary;
+        @apply text-2xl font-bold;
+      }
+    }
+  }
+  .transaction__filter {
+    @apply flex gap-2;
+
+    .transaction__filter_search_by {
+      width: 70.5%;
+    }
+    .transaction__filter_date {
+      width: 29.5%;
+    }
+  }
+  .transaction__table {
+  }
+}

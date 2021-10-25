@@ -5,7 +5,7 @@ const SEO = () => (
     title="TopPay - Token Payment Gateway"
     description="TopPay is a Cryptocurrency Payment Gateway. We provide solutions to help sellers and business owners easily integrate crypto payment gateways into their websites."
     openGraph={{
-      url: 'https://www.url.ie/a',
+      url: 'https://www.toppay.store',
       title: 'Open Graph Title',
       description: 'Open Graph Description',
       images: [
