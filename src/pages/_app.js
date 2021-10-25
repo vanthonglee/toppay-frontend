@@ -3,7 +3,7 @@ import '@/styles/common/reset.scss'
 
 import Head from 'next/head'
 
-import SEO from '@/components/Seo'
+// import SEO from '@/components/Seo'
 import { AdminLayout } from '@/layout'
 
 function MyApp({ Component, pageProps }) {
