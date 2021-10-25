@@ -2,6 +2,7 @@ import 'tailwindcss/tailwind.css'
 
 import Head from 'next/head'
 
+import SEO from '@/components'
 import { AdminLayout } from '@/layout'
 
 function MyApp({ Component, pageProps }) {
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
+        <SEO />
       </Head>
       <AdminLayout>
         <Component {...pageProps} />
