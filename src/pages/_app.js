@@ -2,7 +2,7 @@ import 'tailwindcss/tailwind.css'
 
 import Head from 'next/head'
 
-import SEO from '@/components'
+import SEO from '@/components/Seo'
 import { AdminLayout } from '@/layout'
 
 function MyApp({ Component, pageProps }) {
