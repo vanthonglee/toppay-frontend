@@ -1,9 +1,11 @@
 import BankCard from './bankCard'
+import Calendar from './calendar'
 import ChevronDown from './chevronDown'
 import CircleDollar from './circleDollar'
 import CogWheel from './cogWheel'
 import CubeFrame from './cubeFrame'
 import LayerCube from './layerCube'
+import MagnifyingGlass from './magnifyingGlass'
 import PieChart from './pieChart'
 import Plus from './plus'
 import RingBell from './ringBell'
@@ -23,5 +25,7 @@ export {
   ShoppingBag,
   PieChart,
   Plus,
-  User
+  User,
+  MagnifyingGlass,
+  Calendar
 }

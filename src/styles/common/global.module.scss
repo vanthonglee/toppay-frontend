@@ -1,0 +1,38 @@
+.h1 {
+  @apply font-san-montserrat;
+  @apply text-xl font-bold;
+  lineheight: calc(28 / 16 * 1rem);
+}
+
+.line {
+  border-top: 1px solid #e5e7ed;
+  @apply mb-6;
+}
+
+.input__wrapper {
+  @apply relative;
+
+  .input {
+    @apply bg-neutral-2;
+    border-radius: 4px;
+    @apply h-12 w-full;
+    @apply px-4 py-3;
+    line-height: calc(24 / 14);
+  }
+
+  .input__for_left_icon {
+    @apply pl-12;
+  }
+  .input__icon {
+    @apply absolute top-1/2;
+    transform: translate(0, -50%);
+
+    &.input__icon_left {
+      left: 16px;
+    }
+
+    &.input__icon_right {
+      @apply right-4;
+    }
+  }
+}

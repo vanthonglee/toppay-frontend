@@ -77,13 +77,15 @@ const Sidebar = () => {
             </a>
           </li>
           <li className={clsx([styles.sidebar__item])}>
-            <a className={clsx([styles.sidebar__link])}>
-              <PieChart />
-              <div className={clsx([styles.link__typo])}>
-                <span data-content="Transaction" aria-hidden="true"></span>
-                Transaction
-              </div>
-            </a>
+            <Link href="/transaction">
+              <a className={clsx([styles.sidebar__link])}>
+                <PieChart />
+                <div className={clsx([styles.link__typo])}>
+                  <span data-content="Transaction" aria-hidden="true"></span>
+                  Transaction
+                </div>
+              </a>
+            </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
             <a className={clsx([styles.sidebar__link])}>
