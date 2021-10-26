@@ -40,13 +40,15 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
-            <a className={clsx([styles.sidebar__link])}>
-              <CircleDollar />
-              <div className={clsx([styles.link__typo])}>
-                <span data-content="Payments" aria-hidden="true"></span>
-                Payments
-              </div>
-            </a>
+            <Link href="/payments">
+              <a className={clsx([styles.sidebar__link])}>
+                <CircleDollar />
+                <div className={clsx([styles.link__typo])}>
+                  <span data-content="Payments" aria-hidden="true"></span>
+                  Payments
+                </div>
+              </a>
+            </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
             <a className={clsx([styles.sidebar__link])}>
