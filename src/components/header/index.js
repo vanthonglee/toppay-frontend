@@ -33,7 +33,7 @@ const Header = () => (
           alt="avatar"
         />
         <div className={clsx([styles.header__user_sub_menu])}>
-          <Link href="/">
+          <Link href="/store/new">
             <a className={clsx([styles.header__link])}>
               <Plus />
               Add New Shop
@@ -46,7 +46,7 @@ const Header = () => (
             </a>
           </Link>
           <hr className={clsx([styles.line])} />
-          <a className={clsx([styles.header__link])} href="#">
+          <a className={clsx([styles.header__link])} href="/api/auth/logout">
             Sign out
           </a>
         </div>
