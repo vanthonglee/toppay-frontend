@@ -1,12 +1,14 @@
 import 'tailwindcss/tailwind.css'
 import '@/styles/common/reset.scss'
 
+import { UserProvider } from '@auth0/nextjs-auth0'
 import Head from 'next/head'
 
 // import SEO from '@/components/Seo'
 import { AdminLayout } from '@/layout'
 
 function MyApp({ Component, pageProps }) {
+  const { user } = pageProps
   return (
     <>
       <Head>
@@ -26,9 +28,11 @@ function MyApp({ Component, pageProps }) {
         />
         {/* <SEO /> */}
       </Head>
-      <AdminLayout>
-        <Component {...pageProps} />
-      </AdminLayout>
+      <UserProvider user={user}>
+        <AdminLayout>
+          <Component {...pageProps} />
+        </AdminLayout>
+      </UserProvider>
     </>
   )
 }
