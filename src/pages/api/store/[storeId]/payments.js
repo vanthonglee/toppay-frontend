@@ -4,7 +4,7 @@ export default withApiAuthRequired(async function getPaymentOfStore(req, res) {
   const { storeId } = req.query
   const { accessToken } = await getAccessToken(req, res)
   const response = await fetch(
-    `http://localhost:3001/store/${storeId}/payments`,
+    `${process.env.API_BASE_URL}/store/${storeId}/payments`,
     {
       method: 'GET',
       headers: {
