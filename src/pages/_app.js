@@ -9,6 +9,7 @@ import { AdminLayout } from '@/layout'
 
 function MyApp({ Component, pageProps }) {
   const { user } = pageProps
+  console.log('user', user)
   return (
     <>
       <Head>

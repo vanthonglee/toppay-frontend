@@ -11,6 +11,8 @@
     "next-seo": "^4.28.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-table": "^7.7.0",
+    "react-window": "^1.8.6",
     "sass": "^1.43.3"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "eslint-plugin-unicorn": "^23.0.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
+    "namor": "^2.0.3",
     "postcss": "^8.3.5",
     "prettier": "^2.4.1",
     "tailwindcss": "^2.2.4"
