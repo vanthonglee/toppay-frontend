@@ -6,8 +6,13 @@ import Head from 'next/head'
 
 // import SEO from '@/components/Seo'
 import { AdminLayout } from '@/layout'
-
+import CheckoutLayout from '@/layout/ChechoutLayout'
+const layouts = {
+  L1: AdminLayout,
+  L2: CheckoutLayout
+}
 function MyApp({ Component, pageProps }) {
+  const Layout = layouts[Component.layout] || layouts['L1']
   const { user } = pageProps
   console.log('user', user)
   return (
@@ -30,9 +35,9 @@ function MyApp({ Component, pageProps }) {
         {/* <SEO /> */}
       </Head>
       <UserProvider user={user}>
-        <AdminLayout>
+        <Layout>
           <Component {...pageProps} />
-        </AdminLayout>
+        </Layout>
       </UserProvider>
     </>
   )

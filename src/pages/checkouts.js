@@ -1,14 +1,14 @@
 import Head from 'next/head'
 
-export default function general() {
+export default function checkouts() {
   return (
     <>
       <Head>
-        <title>TopPay - General</title>
+        <title>TopPay - Checkouts</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>General</main>
+      <main>Checkouts</main>
     </>
   )
 }
