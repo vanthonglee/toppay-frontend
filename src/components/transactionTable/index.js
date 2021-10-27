@@ -6,11 +6,11 @@ import { useWindowSize } from 'react-use'
 import { FixedSizeList } from 'react-window'
 
 import makeData from './makdeData'
-import scrollbarWidth from './scrollbarWidth'
 import styles from './transactionTable.module.scss'
 
 const TransactionTable = () => {
   const columns = useMemo(
+    // eslint-disable-next-line sonarjs/cognitive-complexity
     () => [
       {
         Header: 'ID',
@@ -41,6 +41,7 @@ const TransactionTable = () => {
         Header: 'TX ID',
         accessor: 'txID',
         width: 120,
+        // eslint-disable-next-line sonarjs/no-identical-functions
         Cell: ({ value }) => (
           <a
             target="_blank"
@@ -67,7 +68,8 @@ const TransactionTable = () => {
               : status === 'Confirm payment'
               ? 'text-[#7F5345] bg-[#F2EBE4] border-[#CCC5C0]'
               : status === 'Cancel'
-              ? 'text-[#3F51B5] bg-[#E6EBF5] border-[#8A99CF]'
+              ? // eslint-disable-next-line sonarjs/no-duplicate-string
+                'text-[#3F51B5] bg-[#E6EBF5] border-[#8A99CF]'
               : status === 'Partially paid'
               ? 'text-[#3F51B5] bg-[#E6EBF5] border-[#8A99CF]'
               : status === 'Awaiting payment'
@@ -107,15 +109,6 @@ function Table({ columns, data }) {
     []
   )
 
-  let scrollBarSize = 0
-  if (typeof window !== 'undefined') {
-    // browser code
-    scrollBarSize = scrollbarWidth()
-  }
-  // useEffect(() => {
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // })
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -134,6 +127,7 @@ function Table({ columns, data }) {
 
   const RenderRow = useCallback(
     ({ index, style }) => {
+      // eslint-disable-next-line security/detect-object-injection
       const row = rows[index]
       prepareRow(row)
       return (
