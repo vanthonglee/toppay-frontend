@@ -29,7 +29,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
-            <Link href="/general">
+            <Link href="/store">
               <a className={clsx([styles.sidebar__link])}>
                 <CogWheel />
                 <div className={clsx([styles.link__typo])}>
@@ -61,13 +61,15 @@ const Sidebar = () => {
           </li>
 
           <li className={clsx([styles.sidebar__item])}>
-            <a className={clsx([styles.sidebar__link])}>
-              <ShoppingBag />
-              <div className={clsx([styles.link__typo])}>
-                <span data-content="Checkouts" aria-hidden="true"></span>
-                Checkouts
-              </div>
-            </a>
+            <Link href="/checkouts">
+              <a className={clsx([styles.sidebar__link])}>
+                <ShoppingBag />
+                <div className={clsx([styles.link__typo])}>
+                  <span data-content="Checkouts" aria-hidden="true"></span>
+                  Checkouts
+                </div>
+              </a>
+            </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
             <Link href="/transaction">
