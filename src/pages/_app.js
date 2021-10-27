@@ -14,7 +14,6 @@ const layouts = {
 function MyApp({ Component, pageProps }) {
   const Layout = layouts[Component.layout] || layouts['L1']
   const { user } = pageProps
-  console.log('user', user)
   return (
     <>
       <Head>
