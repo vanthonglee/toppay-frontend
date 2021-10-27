@@ -27,9 +27,7 @@ export default function Home() {
         Home Dashboard
         <div>
           {user ? (
-            <div>
-              Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
-            </div>
+            <div>Welcome to TopPay, {user.name}!</div>
           ) : (
             <a href="/api/auth/login">Login</a>
           )}
