@@ -1,28 +1,52 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 import topPayLogo from '../../public/images/logo-rgb.jpg'
 
 const Checkout = () => {
   const router = useRouter()
   const [paymentInfo, setPaymentInfo] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [processing, setProcessing] = useState(false)
+  const [token, setToken] = useState(false)
+  const [contract, setContract] = useState(false)
+
   const { payment_id } = router.query
-  const getPaymentInfo = async payment_id => {
-    const response = await fetch(`/api/payment?payment_id=${payment_id}`, {
-      method: 'GET'
-    })
-    const data = await response.json()
-    setPaymentInfo(data.result)
-  }
-  useEffect(() => {
-    if (payment_id) getPaymentInfo(payment_id)
+  const getPaymentInfo = useCallback(async () => {
+    if (payment_id) {
+      const response = await fetch(`/api/payment?payment_id=${payment_id}`, {
+        method: 'GET'
+      })
+      const data = await response.json()
+      setPaymentInfo(data.result)
+      getTokenInfo(data.result['price_currency'], data.result['token_network'])
+      getContractInfo(data.result['token_network'])
+      setLoading(false)
+    }
   }, [payment_id])
 
+  const getContractInfo = async network => {
+    const response = await fetch(`/api/contracts?network=${network}`)
+    const data = await response.json()
+    setContract(data)
+  }
+
+  const getTokenInfo = async (symbol, network) => {
+    const response = await fetch(
+      `/api/tokens?symbol=${symbol}&network=${network}`
+    )
+    const data = await response.json()
+    if (data && data.length > 0) setToken(data[0])
+  }
+
+  useEffect(() => {
+    getPaymentInfo()
+  }, [getPaymentInfo])
+
   const handleCheckout = () => {
-    setLoading(true)
+    setProcessing(true)
   }
 
   return (
@@ -42,6 +66,21 @@ const Checkout = () => {
               />
             </div>
           </div>
+
+          {(loading || !paymentInfo) && (
+            <>
+              <div className="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-200 animate-pulse"></div>
+              <div className="flex flex-col flex-1 gap-5 sm:p-2">
+                <div className="flex flex-1 flex-col gap-3">
+                  <div className="bg-gray-200 w-full animate-pulse h-14 rounded-2xl"></div>
+                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+                </div>
+              </div>
+            </>
+          )}
 
           {paymentInfo && (
             <>
@@ -110,7 +149,8 @@ const Checkout = () => {
                     <span className="mr-4 inline-block hidden md:block">:</span>
                     <div className="flex-1">
                       <div className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                        {paymentInfo['price_currency']}
+                        {paymentInfo['price_currency']} -{' '}
+                        {paymentInfo['token_network']}
                       </div>
                     </div>
                   </div>
@@ -121,10 +161,10 @@ const Checkout = () => {
                   className="flex justify-center items-center text-xl font-medium text-white uppercase bg-blue-600 w-full p-2 disabled:opacity-50"
                   onClick={handleCheckout}
                   disabled={
-                    loading || paymentInfo['payment_status'] === 'failed'
+                    processing || paymentInfo['payment_status'] === 'failed'
                   }
                 >
-                  {loading && (
+                  {processing && (
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -146,8 +186,10 @@ const Checkout = () => {
                       ></path>
                     </svg>
                   )}
-                  {paymentInfo['payment_status'] === 'waiting'
-                    ? loading
+                  {paymentInfo['payment_status'] == 'completed'
+                    ? 'Completed'
+                    : paymentInfo['payment_status'] === 'waiting'
+                    ? processing
                       ? 'Processing ...'
                       : 'Complete checkout'
                     : 'Payment expired'}
