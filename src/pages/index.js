@@ -1,18 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import clsx from 'clsx'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect } from 'react'
 
-import {
-  CircleDollar,
-  CogWheel,
-  CubeFrame,
-  LayerCube,
-  PieChart,
-  ShoppingBag
-} from '@/components/icons'
+import { CircleDollar } from '@/components/icons'
 import adminStyles from '@/styles/common/adminLayout.module.scss'
 import globalStyles from '@/styles/common/global.module.scss'
 
@@ -43,7 +36,7 @@ export default function Home() {
       </Head>
 
       <section className={clsx([adminStyles.main__container])}>
-        <div className="max-w-5xl mx-auto pt-10">
+        <div className="max-w-5xl pt-10 mx-auto">
           {user ? (
             <>
               <h1 className={clsx([globalStyles.h1])}>
@@ -54,8 +47,8 @@ export default function Home() {
                 rightway.
               </h2>
 
-              <div className="grid grid-cols-3 gap-x-6 max-w-5xl mx-auto">
-                <div className="justify-center bg-white shadow-lg rounded-lg">
+              <div className="grid max-w-5xl grid-cols-3 mx-auto gap-x-6">
+                <div className="justify-center bg-white rounded-lg shadow-lg">
                   <div className="w-20 h-25">
                     <Image
                       src={HomeStoreIcon}
@@ -71,19 +64,19 @@ export default function Home() {
                     </a>
                   </li>
                 </div>
-                <div className="bg-white shadow-lg rounded-lg">
+                <div className="bg-white rounded-lg shadow-lg">
                   <Image
                     src={HomeCheckoutsIcon}
                     alt="TopPay"
-                    className="w-20 h-20 object-cover rounded-full "
+                    className="object-cover w-20 h-20 rounded-full "
                   />
                   <h2>dsds</h2>
                 </div>
-                <div className="bg-white shadow-lg rounded-lg">
+                <div className="bg-white rounded-lg shadow-lg">
                   <Image
                     src={HomeAPIIcon}
                     alt="TopPay"
-                    className="w-20 h-20 object-cover rounded-full "
+                    className="object-cover w-20 h-20 rounded-full "
                   />
                 </div>
               </div>
