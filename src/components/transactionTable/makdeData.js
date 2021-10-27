@@ -8,20 +8,25 @@ const range = len => {
   return arr
 }
 
+const statusArray = [
+  'Paid',
+  'Confirm payment',
+  'Cancel',
+  'Paid',
+  'Partially paid',
+  'Awaiting payment',
+  'Debt'
+]
 const newTransaction = () => {
-  const transactionStatus = Math.random()
+  const transactionStatus = Math.round(Math.random() * 6)
   return {
     id: Math.floor(Math.random() * 1000),
     address: namor.generate({ words: 1, numbers: 0 }),
     amount: Math.floor(Math.random() * 1000),
     txID: namor.generate({ words: 1, numbers: 0 }),
     created: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
-    status:
-      transactionStatus > 0.66
-        ? 'relationship'
-        : transactionStatus > 0.33
-        ? 'complicated'
-        : 'single'
+    // eslint-disable-next-line security/detect-object-injection
+    status: statusArray[transactionStatus]
   }
 }
 

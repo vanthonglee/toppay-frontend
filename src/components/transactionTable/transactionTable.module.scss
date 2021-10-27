@@ -23,6 +23,12 @@
 
     .tbody__tr {
       .tbody__td {
+        border-bottom: 1px solid #dfe3e8;
+        line-height: 24px;
+        & {
+          @apply h-full;
+          @apply flex items-center;
+        }
       }
     }
 
@@ -32,4 +38,10 @@
       }
     }
   }
+}
+
+.circle__status {
+  @apply px-3 rounded-3xl;
+  border-width: 1px;
+  border-style: solid;
 }

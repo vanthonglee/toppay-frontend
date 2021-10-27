@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-key */
 import clsx from 'clsx'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useFlexLayout, useTable } from 'react-table'
+import { useWindowSize } from 'react-use'
 import { FixedSizeList } from 'react-window'
 
 import makeData from './makdeData'
@@ -58,13 +59,40 @@ const TransactionTable = () => {
       {
         Header: 'Status',
         accessor: 'status',
-        width: 160
+        width: 160,
+        Cell: ({ value }) => {
+          const changeBgColorForStatus = status => {
+            return status === 'Paid'
+              ? 'text-[#00ABFB] bg-[#E6FBFF] border-[#7AE2FF]'
+              : status === 'Confirm payment'
+              ? 'text-[#7F5345] bg-[#F2EBE4] border-[#CCC5C0]'
+              : status === 'Cancel'
+              ? 'text-[#3F51B5] bg-[#E6EBF5] border-[#8A99CF]'
+              : status === 'Partially paid'
+              ? 'text-[#3F51B5] bg-[#E6EBF5] border-[#8A99CF]'
+              : status === 'Awaiting payment'
+              ? 'text-[#13C2C2] bg-[#E6FFFB] border-[#87E8DE]'
+              : status === 'Awaiting payment'
+              ? 'text-[#3F51B5] bg-[#E6EBF5] border-[#8A99CF]'
+              : ''
+          }
+          return (
+            <div
+              className={clsx([
+                styles.circle__status,
+                changeBgColorForStatus(value)
+              ])}
+            >
+              {value}
+            </div>
+          )
+        }
       }
     ],
     []
   )
 
-  const data = useMemo(() => makeData(100000), [])
+  const data = useMemo(() => makeData(500), [])
 
   return <Table columns={columns} data={data} />
 }
@@ -113,11 +141,15 @@ function Table({ columns, data }) {
           {...row.getRowProps({
             style
           })}
-          className="tr"
+          className={styles.tbody__tr}
         >
           {row.cells.map(cell => {
             return (
-              <div {...cell.getCellProps()} className="td">
+              <div
+                {...cell.getCellProps()}
+                className={styles.tbody__td}
+                // style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+              >
                 {cell.render('Cell')}
               </div>
             )
@@ -127,6 +159,11 @@ function Table({ columns, data }) {
     },
     [prepareRow, rows]
   )
+
+  /**
+   * Get Height Of Window
+   */
+  const { height } = useWindowSize()
 
   // Render the UI for your table
   return (
@@ -154,7 +191,7 @@ function Table({ columns, data }) {
 
       <div {...getTableBodyProps()} className={clsx([styles['table__body']])}>
         <FixedSizeList
-          height={400}
+          height={height - 450}
           itemCount={rows.length}
           itemSize={48}
           width={totalColumnsWidth}
