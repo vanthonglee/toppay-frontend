@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 
 import {
-  BankCard,
   CircleDollar,
   CogWheel,
   CubeFrame,
@@ -23,31 +22,33 @@ const Sidebar = () => {
               <a className={clsx([styles.sidebar__link])}>
                 <LayerCube />
                 <div className={clsx([styles.link__typo])}>
-                  <span data-content="Home" aria-hidden="true"></span>
-                  Home
+                  <span data-content="Dashboard" aria-hidden="true"></span>
+                  Dashboard
                 </div>
               </a>
             </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
-            <Link href="/general">
+            <Link href="/store">
               <a className={clsx([styles.sidebar__link])}>
                 <CogWheel />
                 <div className={clsx([styles.link__typo])}>
-                  <span data-content="General" aria-hidden="true"></span>
-                  General
+                  <span data-content="Store" aria-hidden="true"></span>
+                  Store
                 </div>
               </a>
             </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
-            <a className={clsx([styles.sidebar__link])}>
-              <CircleDollar />
-              <div className={clsx([styles.link__typo])}>
-                <span data-content="Coin" aria-hidden="true"></span>
-                Coin
-              </div>
-            </a>
+            <Link href="/payments">
+              <a className={clsx([styles.sidebar__link])}>
+                <CircleDollar />
+                <div className={clsx([styles.link__typo])}>
+                  <span data-content="Payments" aria-hidden="true"></span>
+                  Payments
+                </div>
+              </a>
+            </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
             <a className={clsx([styles.sidebar__link])}>
@@ -58,31 +59,25 @@ const Sidebar = () => {
               </div>
             </a>
           </li>
+
           <li className={clsx([styles.sidebar__item])}>
-            <a className={clsx([styles.sidebar__link])}>
-              <BankCard />
-              <div className={clsx([styles.link__typo])}>
-                <span data-content="Invoices" aria-hidden="true"></span>
-                Invoices
-              </div>
-            </a>
-          </li>
-          <li className={clsx([styles.sidebar__item])}>
-            <a className={clsx([styles.sidebar__link])}>
-              <ShoppingBag />
-              <div className={clsx([styles.link__typo])}>
-                <span data-content="Button Checkout" aria-hidden="true"></span>
-                Button Checkout
-              </div>
-            </a>
+            <Link href="/checkouts">
+              <a className={clsx([styles.sidebar__link])}>
+                <ShoppingBag />
+                <div className={clsx([styles.link__typo])}>
+                  <span data-content="Checkouts" aria-hidden="true"></span>
+                  Checkouts
+                </div>
+              </a>
+            </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
             <Link href="/transaction">
               <a className={clsx([styles.sidebar__link])}>
                 <PieChart />
                 <div className={clsx([styles.link__typo])}>
-                  <span data-content="Transaction" aria-hidden="true"></span>
-                  Transaction
+                  <span data-content="Transactions" aria-hidden="true"></span>
+                  Transactions
                 </div>
               </a>
             </Link>
@@ -91,8 +86,8 @@ const Sidebar = () => {
             <a className={clsx([styles.sidebar__link])}>
               <CogWheel />
               <div className={clsx([styles.link__typo])}>
-                <span data-content="Setting" aria-hidden="true"></span>
-                Setting
+                <span data-content="Settings" aria-hidden="true"></span>
+                Settings
               </div>
             </a>
           </li>
