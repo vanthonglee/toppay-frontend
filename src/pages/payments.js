@@ -1,10 +1,30 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import clsx from 'clsx'
 import Head from 'next/head'
-
+import { useState } from 'react'
 import globalStyles from '@/styles/common/global.module.scss'
 import styles from '@/styles/payment.module.scss'
 
 export default function payments() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [selectedCoins, updateCoins] = useState([])
+
+  const onSelectCoin = coin => {
+    selectedCoins.some(item => item === coin)
+      ? updateCoins(selectedCoins.filter(item => item !== coin))
+      : updateCoins([...selectedCoins, coin])
+  }
+
+  const [setUpMyOwnCoin, updateSetUpMyOwnCoin] = useState(false)
+  const [contractAddress, updateContractAddress] = useState(
+    '0x31471E0791fCdbE82fbF4C44943255e923F1b794'
+  )
+  const [contractABI, updateContractABI] =
+    useState(`[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type
+  ":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,
+  "internalType":"address","name":"owner","type":"address"},{"
+  indexed":true,"internalType":"address","name":"spender","ty.....`)
+
   return (
     <>
       <Head>
@@ -24,7 +44,36 @@ export default function payments() {
                 status.
               </p>
             </div>
-            <div className={clsx([styles.payment__form__options])}>Coin</div>
+            {/* Choose Coin */}
+            <div className={clsx([styles.payment__form__options])}>
+              <span
+                className={clsx({
+                  [styles.option__coin]: true,
+                  [styles.selected]: selectedCoins.indexOf('BTC') > -1
+                })}
+                onClick={() => onSelectCoin('BTC')}
+              >
+                BTC
+              </span>
+              <span
+                className={clsx({
+                  [styles.option__coin]: true,
+                  [styles.selected]: selectedCoins.indexOf('ETH') > -1
+                })}
+                onClick={() => onSelectCoin('ETH')}
+              >
+                ETH
+              </span>
+              <span
+                className={clsx({
+                  [styles.option__coin]: true,
+                  [styles.selected]: selectedCoins.indexOf('LTC') > -1
+                })}
+                onClick={() => onSelectCoin('LTC')}
+              >
+                LTC
+              </span>
+            </div>
           </div>
           {/* Stable Coin */}
           <div className={clsx([styles.payment__option_container])}>
@@ -34,7 +83,36 @@ export default function payments() {
                 This is the setup to sync orders from your store
               </p>
             </div>
-            <div className={clsx([styles.payment__form__options])}>Coins</div>
+            {/* Choose Coin */}
+            <div className={clsx([styles.payment__form__options])}>
+              <span
+                className={clsx({
+                  [styles.option__coin]: true,
+                  [styles.selected]: selectedCoins.indexOf('USDTTRC20') > -1
+                })}
+                onClick={() => onSelectCoin('USDTTRC20')}
+              >
+                USDTTRC20
+              </span>
+              <span
+                className={clsx({
+                  [styles.option__coin]: true,
+                  [styles.selected]: selectedCoins.indexOf('TUSD') > -1
+                })}
+                onClick={() => onSelectCoin('TUSD')}
+              >
+                TUSD
+              </span>
+              <span
+                className={clsx({
+                  [styles.option__coin]: true,
+                  [styles.selected]: selectedCoins.indexOf('DAI') > -1
+                })}
+                onClick={() => onSelectCoin('DAI')}
+              >
+                DAI
+              </span>
+            </div>
           </div>
           {/* Own coin */}
           <div className={clsx([styles.payment__option_container])}>
@@ -44,7 +122,65 @@ export default function payments() {
                 This is the setup to sync orders from your store
               </p>
             </div>
-            <div className={clsx([styles.payment__form__options])}>Coins</div>
+            {/* Choose Coin */}
+            <div
+              className={clsx([
+                styles.payment__form__options,
+                styles.form__set_up_coin
+              ])}
+            >
+              <div className={clsx([styles.option__checkbox])}>
+                <input
+                  name="setUpCoin"
+                  type="radio"
+                  id="i-dont-have-my-own-coin"
+                  checked={setUpMyOwnCoin === false}
+                  onClick={() => updateSetUpMyOwnCoin(false)}
+                />
+                <label htmlFor="i-dont-have-my-own-coin">
+                  I don’t have my own coin
+                </label>
+              </div>
+              <div className={clsx([styles.option__checkbox])}>
+                <input
+                  name="setUpCoin"
+                  type="radio"
+                  id="i-want-to-setup-my-own-coin"
+                  checked={setUpMyOwnCoin === true}
+                  onClick={() => updateSetUpMyOwnCoin(true)}
+                />
+                <label htmlFor="i-want-to-setup-my-own-coin">
+                  I want to setup my own coin
+                </label>
+              </div>
+              <div
+                className={clsx([
+                  styles.input__wrapper,
+                  styles.option__contract_address
+                ])}
+              >
+                <label htmlFor="contract-address">Contract Address</label>
+                <input
+                  id="contract-address"
+                  placeholder="input here"
+                  value={contractAddress}
+                  onChange={e => updateContractAddress(e.target.value)}
+                />
+              </div>
+              <div
+                className={clsx([
+                  styles.input__wrapper,
+                  styles.option__contract_api
+                ])}
+              >
+                <label htmlFor="contract-abi">Contract ABI</label>
+                <textarea
+                  name="description"
+                  defaultValue={contractABI}
+                  onChange={e => updateContractABI(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
           <div className={clsx(['flex gap-2 justify-end mt-5'])}>
             <button className={clsx([styles.btn, styles.btn__discard])}>
