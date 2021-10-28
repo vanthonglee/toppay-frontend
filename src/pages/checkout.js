@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router'
-import { useEffect, useState, useCallback } from 'react'
 import { ethers } from 'ethers'
 import Head from 'next/head'
 import Image from 'next/image'
-
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
 import Web3Modal from 'web3modal'
+
 import topPayLogo from '../../public/images/logo-rgb.jpg'
 
 const Checkout = () => {
@@ -102,27 +102,27 @@ const Checkout = () => {
       </Head>
 
       <main>
-        <div className="w-full py-8 px-14 bg-white shadow-lg rounded-lg my-20">
+        <div className="w-full py-8 my-20 bg-white rounded-lg shadow-lg px-14">
           <div className="flex justify-center -mt-16">
             <div className="w-32 h-32 rounded-full border-8 border-[#F9FAFB]">
               <Image
                 src={topPayLogo}
                 alt="TopPay"
-                className="w-20 h-20 object-cover rounded-full "
+                className="object-cover w-20 h-20 rounded-full "
               />
             </div>
           </div>
 
           {(loading || !paymentInfo) && (
             <>
-              <div className="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-200 animate-pulse"></div>
+              <div className="bg-gray-200 h-52 sm:h-full sm:w-72 rounded-xl animate-pulse"></div>
               <div className="flex flex-col flex-1 gap-5 sm:p-2">
-                <div className="flex flex-1 flex-col gap-3">
-                  <div className="bg-gray-200 w-full animate-pulse h-14 rounded-2xl"></div>
-                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
-                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
-                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
-                  <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+                <div className="flex flex-col flex-1 gap-3">
+                  <div className="w-full bg-gray-200 animate-pulse h-14 rounded-2xl"></div>
+                  <div className="w-full h-3 bg-gray-200 animate-pulse rounded-2xl"></div>
+                  <div className="w-full h-3 bg-gray-200 animate-pulse rounded-2xl"></div>
+                  <div className="w-full h-3 bg-gray-200 animate-pulse rounded-2xl"></div>
+                  <div className="w-full h-3 bg-gray-200 animate-pulse rounded-2xl"></div>
                 </div>
               </div>
             </>
@@ -130,71 +130,71 @@ const Checkout = () => {
 
           {paymentInfo && (
             <>
-              <div className=" mb-2 py-2">
-                <h2 className="text-blue-800 text-3xl font-semibold text-center my-2 uppercase">
+              <div className="py-2 mb-2 ">
+                <h2 className="my-2 text-3xl font-semibold text-center text-blue-800 uppercase">
                   {paymentInfo['store_name']}
                 </h2>
-                <p className="mt-3 text-gray-600 font-bold text-sm  tracking-wide text-center">
+                <p className="mt-3 text-sm font-bold tracking-wide text-center text-gray-600">
                   Need complete before: {paymentInfo['payment_end_time']}
                 </p>
               </div>
-              <div className="flex mb-8 justify-between">
+              <div className="flex justify-between mb-8">
                 <div className="">
-                  <div className="mb-2 md:mb-1 md:flex items-center">
-                    <label className="w-48 text-gray-800 block font-bold text-sm uppercase tracking-wide">
+                  <div className="items-center mb-2 md:mb-1 md:flex">
+                    <label className="block w-48 text-sm font-bold tracking-wide text-gray-800 uppercase">
                       Payment No.
                     </label>
-                    <span className="mr-4 inline-block hidden md:block">:</span>
+                    <span className="hidden inline-block mr-4 md:block">:</span>
                     <div className="flex-1">
-                      <div className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                      <div className="w-48 px-4 py-2 leading-tight text-gray-700 bg-gray-200 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-blue-500">
                         {paymentInfo['payment_id']}
                       </div>
                     </div>
                   </div>
-                  <div className="mb-2 md:mb-1 md:flex items-center">
-                    <label className="w-48 text-gray-800 block font-bold text-sm uppercase tracking-wide">
+                  <div className="items-center mb-2 md:mb-1 md:flex">
+                    <label className="block w-48 text-sm font-bold tracking-wide text-gray-800 uppercase">
                       Payment Date.
                     </label>
-                    <span className="mr-4 inline-block hidden md:block">:</span>
+                    <span className="hidden inline-block mr-4 md:block">:</span>
                     <div className="flex-1">
-                      <div className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                      <div className="w-48 px-4 py-2 leading-tight text-gray-700 bg-gray-200 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-blue-500">
                         {paymentInfo['payment_time']}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex mb-8 justify-between">
+              <div className="flex justify-between mb-8">
                 <div className="">
-                  <div className="mb-2 md:mb-1 md:flex items-center">
-                    <label className="w-48 text-gray-800 block font-bold text-sm uppercase tracking-wide">
+                  <div className="items-center mb-2 md:mb-1 md:flex">
+                    <label className="block w-48 text-sm font-bold tracking-wide text-gray-800 uppercase">
                       Store order No.
                     </label>
-                    <span className="mr-4 inline-block hidden md:block">:</span>
+                    <span className="hidden inline-block mr-4 md:block">:</span>
                     <div className="flex-1">
-                      <div className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                      <div className="w-48 px-4 py-2 leading-tight text-gray-700 bg-gray-200 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-blue-500">
                         {paymentInfo['order_id']}
                       </div>
                     </div>
                   </div>
-                  <div className="mb-2 md:mb-1 md:flex items-center">
-                    <label className="w-48 text-gray-800 block font-bold text-sm uppercase tracking-wide">
+                  <div className="items-center mb-2 md:mb-1 md:flex">
+                    <label className="block w-48 text-sm font-bold tracking-wide text-gray-800 uppercase">
                       Amount
                     </label>
-                    <span className="mr-4 inline-block hidden md:block">:</span>
+                    <span className="hidden inline-block mr-4 md:block">:</span>
                     <div className="flex-1">
-                      <div className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                      <div className="w-48 px-4 py-2 leading-tight text-gray-700 bg-gray-200 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-blue-500">
                         {paymentInfo['price_amount']}
                       </div>
                     </div>
                   </div>
-                  <div className="mb-2 md:mb-1 md:flex items-center">
-                    <label className="w-48 text-gray-800 block font-bold text-sm uppercase tracking-wide">
+                  <div className="items-center mb-2 md:mb-1 md:flex">
+                    <label className="block w-48 text-sm font-bold tracking-wide text-gray-800 uppercase">
                       currency
                     </label>
-                    <span className="mr-4 inline-block hidden md:block">:</span>
+                    <span className="hidden inline-block mr-4 md:block">:</span>
                     <div className="flex-1">
-                      <div className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                      <div className="w-48 px-4 py-2 leading-tight text-gray-700 bg-gray-200 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-blue-500">
                         {paymentInfo['price_currency']} -{' '}
                         {paymentInfo['token_network']}
                       </div>
@@ -204,7 +204,7 @@ const Checkout = () => {
               </div>
               <div className="flex justify-center mt-4">
                 <button
-                  className="flex justify-center items-center text-xl font-medium text-white uppercase bg-blue-600 w-full p-2 disabled:opacity-50"
+                  className="flex items-center justify-center w-full p-2 text-xl font-medium text-white uppercase bg-blue-600 disabled:opacity-50"
                   onClick={handleCheckout}
                   disabled={
                     processing ||
@@ -214,7 +214,7 @@ const Checkout = () => {
                 >
                   {processing && (
                     <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      className="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -252,7 +252,7 @@ const Checkout = () => {
             target="_blank"
             href="https://toppay.store"
             rel="noreferrer"
-            className="text-blue-600 ml-1"
+            className="ml-1 text-blue-600"
           >
             Top Pay
           </a>
