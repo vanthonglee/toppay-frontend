@@ -33,11 +33,10 @@ function MyApp({ Component, pageProps }) {
         />
         {/* <SEO /> */}
       </Head>
-      <UserProvider user={user}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </UserProvider>
+
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }

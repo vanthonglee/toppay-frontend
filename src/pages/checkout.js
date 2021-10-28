@@ -2,9 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useCallback } from 'react'
-
+import { ethers } from 'ethers'
+import Web3Modal from 'web3modal'
 import topPayLogo from '../../public/images/logo-rgb.jpg'
-
+import getWeb3 from '../../utils/getWeb3'
 const Checkout = () => {
   const router = useRouter()
   const [paymentInfo, setPaymentInfo] = useState(null)
@@ -23,6 +24,7 @@ const Checkout = () => {
       setPaymentInfo(data.result)
       getTokenInfo(data.result['price_currency'], data.result['token_network'])
       getContractInfo(data.result['token_network'])
+
       setLoading(false)
     }
   }, [payment_id])
@@ -30,23 +32,64 @@ const Checkout = () => {
   const getContractInfo = async network => {
     const response = await fetch(`/api/contracts?network=${network}`)
     const data = await response.json()
-    setContract(data)
+    if (data) setContract(data)
   }
 
   const getTokenInfo = async (symbol, network) => {
     const response = await fetch(
       `/api/tokens?symbol=${symbol}&network=${network}`
     )
-    const data = await response.json()
-    if (data && data.length > 0) setToken(data[0])
+    const { result } = await response.json()
+
+    if (result && result.length > 0) setToken(result[0])
   }
 
   useEffect(() => {
     getPaymentInfo()
   }, [getPaymentInfo])
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     setProcessing(true)
+    try {
+      const web3Modal = new Web3Modal({ theme: 'dark' })
+      const connection = await web3Modal.connect()
+      const provider = new ethers.providers.Web3Provider(connection)
+      const signer = provider.getSigner()
+
+      const tokenContract = new ethers.Contract(
+        token.address,
+        JSON.parse(token.abi).abi,
+        signer
+      )
+
+      const txRespone = await tokenContract.approve(
+        contract.address,
+        ethers.utils.parseUnits(paymentInfo.price_amount.toString(), 18)
+      )
+      const approved = await txRespone.wait()
+      console.log(approved)
+      const paymentContract = new ethers.Contract(
+        contract.address,
+        contract.abi,
+        signer
+      )
+
+      const txContract = await paymentContract.clientPay(
+        token.address,
+        paymentInfo['receive_address'],
+        ethers.utils.parseUnits(paymentInfo.price_amount.toString(), 18),
+        paymentInfo.payment_id
+      )
+      const result = await txContract.wait()
+      setPaymentInfo(prevState => ({
+        ...prevState,
+        payment_status: 'completed'
+      }))
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setProcessing(false)
+    }
   }
 
   return (
@@ -161,7 +204,9 @@ const Checkout = () => {
                   className="flex justify-center items-center text-xl font-medium text-white uppercase bg-blue-600 w-full p-2 disabled:opacity-50"
                   onClick={handleCheckout}
                   disabled={
-                    processing || paymentInfo['payment_status'] === 'failed'
+                    processing ||
+                    paymentInfo['payment_status'] === 'failed' ||
+                    paymentInfo['payment_status'] === 'completed'
                   }
                 >
                   {processing && (
