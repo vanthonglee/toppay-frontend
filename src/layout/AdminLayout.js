@@ -5,7 +5,7 @@ import { Header, Sidebar } from '@/components'
 
 const AdminLayout = ({ children }) => {
   return (
-    <UserProvider user={user}>
+    <UserProvider>
       <div className="flex flex-col min-h-screen font-san-mulish">
         <Header />
         <main className="flex flex-grow h-full bg-[#F9FAFB]">

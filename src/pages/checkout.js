@@ -1,11 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useCallback } from 'react'
 import { ethers } from 'ethers'
+import Head from 'next/head'
+import Image from 'next/image'
+
 import Web3Modal from 'web3modal'
 import topPayLogo from '../../public/images/logo-rgb.jpg'
-import getWeb3 from '../../utils/getWeb3'
+
 const Checkout = () => {
   const router = useRouter()
   const [paymentInfo, setPaymentInfo] = useState(null)
@@ -67,26 +68,28 @@ const Checkout = () => {
         ethers.utils.parseUnits(paymentInfo.price_amount.toString(), 18)
       )
       const approved = await txRespone.wait()
-      console.log(approved)
-      const paymentContract = new ethers.Contract(
-        contract.address,
-        contract.abi,
-        signer
-      )
+      if (approved) {
+        const paymentContract = new ethers.Contract(
+          contract.address,
+          contract.abi,
+          signer
+        )
 
-      const txContract = await paymentContract.clientPay(
-        token.address,
-        paymentInfo['receive_address'],
-        ethers.utils.parseUnits(paymentInfo.price_amount.toString(), 18),
-        paymentInfo.payment_id
-      )
-      const result = await txContract.wait()
-      setPaymentInfo(prevState => ({
-        ...prevState,
-        payment_status: 'completed'
-      }))
+        const txContract = await paymentContract.clientPay(
+          token.address,
+          paymentInfo['receive_address'],
+          ethers.utils.parseUnits(paymentInfo.price_amount.toString(), 18),
+          paymentInfo.payment_id
+        )
+        const result = await txContract.wait()
+        if (result)
+          setPaymentInfo(prevState => ({
+            ...prevState,
+            payment_status: 'completed'
+          }))
+      }
     } catch (error) {
-      console.error(error)
+      alert(error.message)
     } finally {
       setProcessing(false)
     }

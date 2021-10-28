@@ -247,7 +247,7 @@ const contracts = {
   }
 }
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   const { network } = req.query
 
   res.status(200).json(contracts[network])
