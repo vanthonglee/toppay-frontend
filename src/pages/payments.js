@@ -2,6 +2,7 @@
 import clsx from 'clsx'
 import Head from 'next/head'
 import { useState } from 'react'
+
 import globalStyles from '@/styles/common/global.module.scss'
 import styles from '@/styles/payment.module.scss'
 

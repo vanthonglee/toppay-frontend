@@ -1,10 +1,10 @@
-import Head from 'next/head'
 import clsx from 'clsx'
+import Head from 'next/head'
+import { useCallback, useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+
 import adminStyles from '@/styles/common/adminLayout.module.scss'
 import globalStyles from '@/styles/common/global.module.scss'
-import { useState, useEffect, useCallback } from 'react'
-
-import { v4 as uuidv4 } from 'uuid'
 export default function Store() {
   const [stores, setStores] = useState([])
 
@@ -56,10 +56,10 @@ export default function Store() {
       <section className={clsx([adminStyles.main__container])}>
         <h1 className={clsx([globalStyles.h1])}>My Store</h1>
 
-        <div className="overflow-x-auto mt-6">
-          <table className="table-auto border-collapse w-full">
+        <div className="mt-6 overflow-x-auto">
+          <table className="w-full border-collapse table-auto">
             <thead>
-              <tr className="rounded-lg text-sm font-medium text-gray-700 text-left">
+              <tr className="text-sm font-medium text-left text-gray-700 rounded-lg">
                 <th className="px-4 py-2 bg-gray-200">Name</th>
                 <th className="px-4 py-2 bg-gray-200">API Key</th>
                 <th className="px-4 py-2 bg-gray-200">Token</th>
@@ -70,14 +70,14 @@ export default function Store() {
                 stores.map(store => (
                   <tr
                     key={store.store_id}
-                    className="hover:bg-gray-100 border-b border-gray-200 py-10"
+                    className="py-10 border-b border-gray-200 hover:bg-gray-100"
                   >
                     <td className="px-4 py-4">{store['store_name']}</td>
                     <td className="px-4 py-4">
                       {store['api_key']}
                       <button
                         onClick={() => handleGenKey(store)}
-                        className="border text-blue-600 px-3 py-1 ml-2 rounded-xl hover:bg-gray-300"
+                        className="px-3 py-1 ml-2 text-blue-600 border rounded-xl hover:bg-gray-300"
                       >
                         Gen key
                       </button>
