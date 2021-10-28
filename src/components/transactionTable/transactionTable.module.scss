@@ -1,0 +1,47 @@
+.transaction__table {
+  // @apply w-full;
+  @apply font-san-montserrat;
+
+  .table__header {
+    .tr {
+      .th {
+        @apply font-bold text-xs uppercase;
+        line-height: 24px;
+        letter-spacing: 0.75px;
+      }
+    }
+  }
+  .table__body {
+    @apply w-full #{!important};
+
+    font-size: 14px;
+    line-height: 24px;
+
+    .cell__address {
+      @apply text-secondary underline;
+    }
+
+    .tbody__tr {
+      .tbody__td {
+        border-bottom: 1px solid #dfe3e8;
+        line-height: 24px;
+        & {
+          @apply h-full;
+          @apply flex items-center;
+        }
+      }
+    }
+
+    div[role='row'] {
+      div[rolw='cell'] {
+        @apply m-auto;
+      }
+    }
+  }
+}
+
+.circle__status {
+  @apply px-3 rounded-3xl;
+  border-width: 1px;
+  border-style: solid;
+}

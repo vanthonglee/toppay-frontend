@@ -1,0 +1,64 @@
+.modal {
+  @apply block fixed z-10 left-0 top-0;
+  @apply w-full h-full;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.75); /* Black w/ opacity */
+  @apply w-full h-full flex flex-col items-center justify-center;
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 200ms;
+  @apply opacity-0 invisible;
+
+  .modal__container {
+    width: 82.5%;
+    height: 73.3%;
+    transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 200ms;
+    @apply flex flex-col relative opacity-0 translate-y-9 invisible scale-50;
+    background: #ffffff;
+    box-shadow: 0px 12px 48px -16px rgba(0, 0, 0, 0.32);
+    border-radius: 12px;
+
+    .modal__header {
+      @apply flex justify-between items-center;
+      @apply p-6;
+
+      .modal__title {
+        @apply font-san-montserrat font-medium text-dark-900 text-lg;
+        line-height: 160%;
+        letter-spacing: 0.2px;
+      }
+
+      .icon__close {
+        color: #000;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        // @apply absolute;
+        // left: 37px;
+        // top: 8px;
+
+        &:hover,
+        &:focus {
+          color: gray;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .modal__content {
+      @apply bg-white flex-grow mx-12 mb-14;
+    }
+  }
+
+  &.active {
+    transition-duration: 250ms;
+    transition-delay: 0ms;
+    @apply opacity-100 visible transition-all;
+    .modal__container {
+      transition-delay: 200ms;
+      transition-duration: 350ms;
+      @apply transition-all opacity-100 visible scale-100 transform translate-y-0;
+    }
+  }
+}

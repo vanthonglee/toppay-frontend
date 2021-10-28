@@ -5,8 +5,15 @@
   font-size: 14px;
   font-weight: 400;
 
+  @apply text-primary;
+
   * {
+    color: inherit;
     font-weight: inherit;
     font-size: inherit;
+  }
+
+  li {
+    list-style: none;
   }
 }
