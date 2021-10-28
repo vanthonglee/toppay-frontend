@@ -43,6 +43,8 @@
 
       &.form__set_up_coin {
         @apply flex-col items-start;
+        padding: 18px 24px;
+
         .option__checkbox {
           @apply flex items-center gap-2;
 
