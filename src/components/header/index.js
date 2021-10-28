@@ -38,7 +38,7 @@ const Header = ({ hasNav = true }) => {
           <span className="ml-1 font-extrabold">TOP PAY</span>
         </a>
       </Link>
-      {hasNav && (
+      {hasNav && user && (
         <div className={clsx([styles.header__right])}>
           <div className={clsx([styles.header__shop_name])}>
             {/* <span className="mr-[7px]">Orangedroopy</span> <ChevronDown /> */}
