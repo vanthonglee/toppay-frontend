@@ -51,13 +51,15 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className={clsx([styles.sidebar__item])}>
-            <a className={clsx([styles.sidebar__link])}>
-              <CubeFrame />
-              <div className={clsx([styles.link__typo])}>
-                <span data-content="API" aria-hidden="true"></span>
-                API
-              </div>
-            </a>
+            <Link href="/apiSetting">
+              <a className={clsx([styles.sidebar__link])}>
+                <CubeFrame />
+                <div className={clsx([styles.link__typo])}>
+                  <span data-content="API" aria-hidden="true"></span>
+                  API
+                </div>
+              </a>
+            </Link>
           </li>
 
           <li className={clsx([styles.sidebar__item])}>
