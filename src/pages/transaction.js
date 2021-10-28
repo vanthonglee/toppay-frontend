@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import Head from 'next/head'
 
+import { TransactionTable } from '@/components'
 import { Calendar, MagnifyingGlass } from '@/components//icons'
 import adminStyles from '@/styles/common/adminLayout.module.scss'
 import globalStyles from '@/styles/common/global.module.scss'
@@ -119,7 +120,7 @@ export default function Home() {
               styles.transaction__table
             ])}
           >
-            Table
+            <TransactionTable />
           </div>
         </div>
       </section>
