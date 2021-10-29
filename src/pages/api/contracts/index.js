@@ -250,5 +250,6 @@ const contracts = {
 export default function handler(req, res) {
   const { network } = req.query
 
+  // eslint-disable-next-line security/detect-object-injection
   res.status(200).json(contracts[network])
 }

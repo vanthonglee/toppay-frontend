@@ -1,6 +1,8 @@
-import Link from 'next/link'
-import { TopPayLogo } from '@/components/icons'
 import clsx from 'clsx'
+import Link from 'next/link'
+
+import { TopPayLogo } from '@/components/icons'
+
 import styles from './header.module.scss'
 
 const HeaderCheckout = () => {

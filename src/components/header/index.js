@@ -1,11 +1,12 @@
-import { Plus, RingBell, TopPayLogo, User } from '@/components/icons'
+import { useUser } from '@auth0/nextjs-auth0'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 
-import Link from 'next/link'
-import clsx from 'clsx'
+import { Plus, RingBell, TopPayLogo, User } from '@/components/icons'
+
 import styles from './header.module.scss'
-import { useRouter } from 'next/router'
-import { useUser } from '@auth0/nextjs-auth0'
 
 const Header = ({ hasNav = true }) => {
   const { user } = useUser()
@@ -44,7 +45,7 @@ const Header = ({ hasNav = true }) => {
             {/* <span className="mr-[7px]">Orangedroopy</span> <ChevronDown /> */}
             <div className="relative inline-flex">
               <svg
-                className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
+                className="absolute top-0 right-0 w-2 h-2 m-4 pointer-events-none"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 412 232"
               >

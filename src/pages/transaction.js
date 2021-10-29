@@ -1,5 +1,8 @@
+import { useUser } from '@auth0/nextjs-auth0'
 import clsx from 'clsx'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
 
 import { TransactionTable } from '@/components'
 import { Calendar, MagnifyingGlass } from '@/components//icons'
@@ -8,6 +11,28 @@ import globalStyles from '@/styles/common/global.module.scss'
 import styles from '@/styles/transaction.module.scss'
 
 export default function Home() {
+  const { user } = useUser()
+  const [stores, setStores] = useState([])
+  const router = useRouter()
+
+  const getStores = useCallback(async () => {
+    if (user) {
+      const respone = await fetch('/api/store')
+      const { result } = await respone.json()
+      setStores(result)
+    }
+  }, [user])
+
+  useEffect(() => {
+    getStores()
+  }, [user, getStores])
+
+  const handleStoreChange = event => {
+    event.preventDefault()
+
+    router.push(`/?store=${event.target.value}`)
+  }
+
   return (
     <>
       <Head>
@@ -16,7 +41,22 @@ export default function Home() {
       </Head>
 
       <section className={clsx([adminStyles.main__container])}>
-        <h1 className={clsx([globalStyles.h1])}>Transaction Log</h1>
+        <div className="flex justify-between">
+          <h1 className={clsx([globalStyles.h1])}>Transaction Log</h1>
+          <select
+            className="h-10 pl-5 pr-10 bg-white appearance-none hover:border-gray-400 focus:outline-none"
+            onChange={handleStoreChange}
+            defaultValue={0}
+          >
+            {stores &&
+              stores.length > 0 &&
+              stores.map(item => (
+                <option key={item.store_id} value={item.store_id}>
+                  {item.store_name}
+                </option>
+              ))}
+          </select>
+        </div>
         <div className={clsx([styles.transaction__container])}>
           {/* Status Types */}
           <div

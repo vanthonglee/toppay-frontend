@@ -1,0 +1,98 @@
+.payment__container {
+  @apply font-san-montserrat;
+  @apply mt-3 w-full;
+  @apply flex  items-center justify-center;
+
+  .payment__option_container {
+    @apply flex;
+    gap: 50px;
+
+    &:not(:first-child) {
+      @apply mt-6;
+    }
+
+    .payment__option_explanation {
+      width: 300px;
+
+      .option__title {
+        @apply font-semibold;
+        line-height: 24px;
+      }
+      .option__description {
+        line-height: 160%;
+      }
+    }
+    .payment__form__options {
+      width: calc(680 / 16 * 1rem);
+      @apply bg-white rounded-lg;
+      @apply px-6 py-2;
+      box-shadow: 0px 0px 1px rgba(40, 41, 61, 0.08),
+        0px 0.5px 2px rgba(96, 97, 112, 0.16);
+
+      @apply flex gap-2 flex-wrap items-center;
+
+      .option__coin {
+        @apply p-1  opacity-20 cursor-pointer;
+        border-radius: 2px;
+        border: 1px solid #00abfb;
+
+        &.selected {
+          @apply opacity-100;
+        }
+      }
+
+      &.form__set_up_coin {
+        @apply flex-col items-start;
+        padding: 18px 24px;
+
+        .option__checkbox {
+          @apply flex items-center gap-2;
+
+          &:not(:first-child) {
+            @apply mt-3;
+          }
+        }
+
+        .input__wrapper {
+          @apply flex gap-6 justify-between w-full;
+          label {
+            @apply font-san-montserrat;
+            line-height: 24px;
+          }
+
+          input,
+          textarea {
+            width: calc(448 / 16 * 1rem);
+            background: #f4f5f6;
+            border-radius: 4px;
+            min-height: 48px;
+            @apply p-3;
+            @apply outline-none;
+          }
+        }
+        .option__contract_address {
+        }
+        .option__contract_api {
+          textarea {
+            min-height: 100px;
+            resize: none;
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    @apply py-2 px-5;
+    line-height: 24px;
+    @apply font-semibold bg-white;
+    @apply rounded-lg;
+    // variation
+    &.btn__discard {
+      border: 1px solid #c4cdd5;
+    }
+    &.btn__save {
+      @apply bg-secondary text-white;
+    }
+  }
+}
